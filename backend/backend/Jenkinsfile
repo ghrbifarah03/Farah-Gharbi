@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'github-creds',
+                    url: 'https://github.com/ghrbifarah03/Farah-Gharbi.git'
+            }
+        }
+        stage('Build Maven') {
+            steps {
+                dir('backend/backend') {
+                    sh 'mvn compile'
+                }
+            }
+        }
+    }
+}
